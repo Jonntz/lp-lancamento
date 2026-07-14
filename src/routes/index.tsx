@@ -115,6 +115,7 @@ function RegistrationForm({ id }: { id: string }) {
   const [data, setData] = useState<FormData>({ nome: "", whatsapp: "", cidade: "" });
   const [name, setName] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
+  const [cidade, setCidade] = useState("");
 
   const submit = async (e: FormEvent) => {
     e.preventDefault();
@@ -134,7 +135,9 @@ function RegistrationForm({ id }: { id: string }) {
           data: new Date().toLocaleString("pt-BR", { timeZone: "America/Sao_Paulo" }),
         }),
       });
-    } catch {}
+    } catch {
+      console.log("erro");
+    }
     const msg = encodeURIComponent(
       `🟢 *Nova inscrição — Lançamento Biancardine*\n\n👤 *Nome:* ${data.nome}\n*WhatsApp:* ${data.whatsapp}\n*Cidade:* ${data.cidade}`,
     );
@@ -177,6 +180,15 @@ function RegistrationForm({ id }: { id: string }) {
             onChange={(e) => setName(e.target.value)}
             autoComplete="name"
           />
+
+          <Field
+            label="Cidade"
+            type="text"
+            required
+            value={cidade}
+            onChange={(e) => setCidade(e.target.value)}
+          />
+
           <Field
             label="WhatsApp com código do país"
             type="tel"
