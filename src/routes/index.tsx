@@ -1,20 +1,21 @@
-import heroDuo from "@/assets/hero-duo.png.asset.json";
+import MobileBg from "@/assets/Mobile.png";
+import PcBg from "@/assets/Pc.png";
 import { createFileRoute } from "@tanstack/react-router";
 import {
-    ArrowRight,
-    Briefcase,
-    Calendar,
-    ChevronDown,
-    Crown,
-    Landmark,
-    Lock,
-    MapPin,
-    Rocket,
-    ShieldCheck,
-    Star,
-    Target,
-    Ticket,
-    Users,
+  ArrowRight,
+  Briefcase,
+  Calendar,
+  ChevronDown,
+  Crown,
+  Landmark,
+  Lock,
+  MapPin,
+  Rocket,
+  ShieldCheck,
+  Star,
+  Target,
+  Ticket,
+  Users,
 } from "lucide-react";
 import { useEffect, useMemo, useState, type FormEvent } from "react";
 
@@ -96,7 +97,7 @@ function SaveTheDateBar() {
     <div className="sticky top-0 z-40 border-b border-primary/40 bg-background/90 backdrop-blur">
       <div className="mx-auto flex max-w-7xl items-center justify-center gap-2 px-4 py-2 sm:gap-3">
         <span className="h-2 w-2 shrink-0 rounded-full bg-primary animate-blink" />
-        <span className="font-display text-sm tracking-[0.25em] text-primary animate-blink sm:text-base sm:tracking-[0.32em]">
+        <span className="font-display lg:text-2xl tracking-[0.25em] text-primary animate-blink sm:text-xl sm:tracking-[0.32em]">
           SAVE THE DATE · MINAS GERAIS
         </span>
         <span className="h-2 w-2 shrink-0 rounded-full bg-primary animate-blink" />
@@ -114,8 +115,6 @@ function RegistrationForm({ id }: { id: string }) {
   const [state, setState] = useState<"idle" | "loading" | "done">("idle");
   const [data, setData] = useState<FormData>({ nome: "", whatsapp: "", cidade: "" });
   const [name, setName] = useState("");
-  const [whatsapp, setWhatsapp] = useState("");
-  const [cidade, setCidade] = useState("");
 
   const submit = async (e: FormEvent) => {
     e.preventDefault();
@@ -164,7 +163,9 @@ function RegistrationForm({ id }: { id: string }) {
         <div className="mt-6 rounded-xl border border-primary/40 bg-primary/10 p-5 text-center">
           <ShieldCheck className="mx-auto h-8 w-8 text-primary" />
           <p className="mt-3 font-semibold text-foreground">
-            {name ? `${name.split(" ")[0]}, sua cadeira está reservada!` : "Cadeira reservada!"}
+            {data.nome
+              ? `${data.nome.split(" ")[0]}, sua cadeira está reservada!`
+              : "Cadeira reservada!"}
           </p>
           <p className="mt-1 text-sm text-muted-foreground">
             Enviamos a confirmação para o seu WhatsApp.
@@ -176,8 +177,8 @@ function RegistrationForm({ id }: { id: string }) {
             label="Nome completo"
             type="text"
             required
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            value={data.nome}
+            onChange={(e) => setData({ ...data, nome: e.target.value })}
             autoComplete="name"
           />
 
@@ -185,16 +186,16 @@ function RegistrationForm({ id }: { id: string }) {
             label="Cidade"
             type="text"
             required
-            value={cidade}
-            onChange={(e) => setCidade(e.target.value)}
+            value={data.cidade}
+            onChange={(e) => setData({ ...data, cidade: e.target.value })}
           />
 
           <Field
             label="WhatsApp com código do país"
             type="tel"
             required
-            value={whatsapp}
-            onChange={(e) => setWhatsapp(e.target.value)}
+            value={data.whatsapp}
+            onChange={(e) => setData({ ...data, whatsapp: e.target.value })}
             autoComplete="tel"
           />
           <button
@@ -239,9 +240,14 @@ function Hero() {
         className="pointer-events-none absolute inset-x-0 top-0 h-[52vh] sm:h-[60vh] lg:inset-0 lg:h-full"
       >
         <img
-          src={heroDuo.url}
-          alt=""
-          className="h-full w-full object-contain object-top opacity-70 lg:object-cover lg:object-[75%_20%]"
+          src={MobileBg}
+          alt="Fundo mobile"
+          className="block h-full w-full object-cover object-top opacity-70 lg:hidden"
+        />
+        <img
+          src={PcBg}
+          alt="Fundo desktop"
+          className="hidden h-full w-full object-cover object-top opacity-70 lg:block"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-background/60 to-background lg:bg-gradient-to-r lg:from-background lg:via-background/70 lg:to-background/10" />
       </div>
