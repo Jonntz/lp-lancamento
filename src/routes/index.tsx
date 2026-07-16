@@ -242,7 +242,7 @@ function Hero() {
         <img
           src={MobileBg}
           alt="Fundo mobile"
-          className="block h-full w-full object-cover object-top opacity-70 lg:hidden"
+          className="block h-full w-full object-cover object-top  lg:hidden"
         />
         <img
           src={PcBg}
